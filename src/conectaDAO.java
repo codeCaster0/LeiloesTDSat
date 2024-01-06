@@ -22,7 +22,7 @@ public class conectaDAO {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?autoReconnect=true&useSSL=false", "user", "password");
 
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Error, class 'ConectaDAO' " + erro.getMessage() + "\nCheck for typos or a wrong user/password on 'DriverManager.GetConnection'", "Connection error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error, class 'ConectaDAO' " + erro.getMessage() + "\nCheck for typos or a wrong user/password on 'DriverManager.getConnection'", "Connection error", JOptionPane.ERROR_MESSAGE);
         }
         return conn;
     }

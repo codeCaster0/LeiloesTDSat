@@ -150,7 +150,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         String status = "A Venda";
 
         if (nome.isEmpty() || valor.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Erro, as caixas de texto nome e valor não podem ficar vazias.\nPor favor preencha os dados e tente novamente", "Erro de inserção", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro, as caixas de texto nome e valor não podem ficar vazias.\nPor favor preencha os dados e tente novamente", "E  rro de inserção", JOptionPane.ERROR_MESSAGE);
         } else if (!nome.isEmpty() || !valor.isEmpty()) {
             produto.setNome(nome);
             produto.setValor(Integer.parseInt(valor));
