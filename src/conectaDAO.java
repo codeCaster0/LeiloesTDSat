@@ -1,7 +1,6 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -19,7 +18,7 @@ public class conectaDAO {
         Connection conn = null;
         try {
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?autoReconnect=true&useSSL=false", "user", "password");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?autoReconnect=true&useSSL=false", "root", "505101");
 
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Error, class 'ConectaDAO' " + erro.getMessage() + "\nCheck for typos or a wrong user/password on 'DriverManager.getConnection'", "Connection error", JOptionPane.ERROR_MESSAGE);
