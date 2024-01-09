@@ -1,5 +1,6 @@
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -138,16 +139,20 @@ public class listagemVIEW extends javax.swing.JFrame {
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
         String id = id_produto_venda.getText();
+        if (id.isEmpty() || id.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Por favor, inserir id do produto vendido na caixa de texto", "Erro de inserção", JOptionPane.ERROR_MESSAGE);
+        } else {
+            ProdutosDAO produtosdao = new ProdutosDAO();
 
-        ProdutosDAO produtosdao = new ProdutosDAO();
-
-        //produtosdao.venderProduto(Integer.parseInt(id));
-        listarProdutos();
+            produtosdao.venderProduto(Integer.parseInt(id));
+            listarProdutos();
+        }
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+       vendasVIEW vendas = new vendasVIEW();
+       vendas.setVisible(true);
+       dispose();
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

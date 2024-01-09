@@ -45,7 +45,7 @@ public class ProdutosDAO {
 
         List<ProdutosDTO> produtosLista = new ArrayList<>();
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?autoReconnect=true&useSSL=false", "user", "password");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?autoReconnect=true&useSSL=false", "root", "505101");
             try {
                 stmt = con.prepareStatement("SELECT * FROM produtos");
                 rs = stmt.executeQuery();
@@ -75,4 +75,56 @@ public class ProdutosDAO {
         return produtosLista;
     }
 
+    public void venderProduto(int id) {
+        ResultSet rs = null;
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?autoReconnect=true&useSSL=false", "root", "505101")) {
+
+            String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
+            try (PreparedStatement stmt = con.prepareStatement(sql)) {
+
+                stmt.setInt(1, id);
+                stmt.executeUpdate();
+
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error, class 'ProdutosDAO' " + ex.getMessage() + "\nCheck for typos or a wrong user/password on 'DriverManager.getConnection'", "Connection error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public List<ProdutosDTO> listarProdutosVendidos() {
+        Connection con;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<ProdutosDTO> produtosLista = new ArrayList<>();
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/uc11?autoReconnect=true&useSSL=false", "root", "505101");
+            try {
+                stmt = con.prepareStatement("SELECT * FROM produtos WHERE status = 'Vendido'");
+                rs = stmt.executeQuery();
+
+                while (rs.next()) {
+
+                    ProdutosDTO produto = new ProdutosDTO();
+
+                    produto.setId(rs.getInt("id"));
+                    produto.setNome(rs.getString("nome"));
+                    produto.setValor(rs.getInt("valor"));
+                    produto.setStatus(rs.getString("status"));
+                    produtosLista.add(produto);
+
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error, class 'ProdutosDAO' " + ex.getMessage() + "\nCheck for typos or a wrong user/password on 'DriverManager.getConnection'", "Connection error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                con.close();
+                stmt.close();
+                rs.close();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error, class 'ProdutosDAO' " + ex.getMessage() + "\nCheck for typos or a wrong user/password on 'DriverManager.getConnection'", "Connection error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return produtosLista;
+    }
 }
